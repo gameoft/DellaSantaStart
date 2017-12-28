@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DellaSantaStart.Core
+namespace DellaSanta.Core
 {
     public class Course
     {

@@ -62,9 +62,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DellaSantaStart.Core\DellaSantaStart.Core.csproj">
+    <ProjectReference Include="..\DellaSantaStart.Core\DellaSanta.Core.csproj">
       <Project>{a508f741-a068-4a20-8973-44fc857caacb}</Project>
-      <Name>DellaSantaStart.Core</Name>
+      <Name>DellaSanta.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

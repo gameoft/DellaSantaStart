@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using DellaSantaStart.Core;
+using DellaSanta.Core;
 
 namespace DellaSanta.Layer
 {

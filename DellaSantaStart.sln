@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellaSantaStart", "DellaSan
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{4B0838EF-5981-4AF0-AB10-2D154D5AB2D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellaSantaStart.Core", "Libraries\DellaSantaStart.Core\DellaSantaStart.Core.csproj", "{A508F741-A068-4A20-8973-44FC857CAACB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellaSanta.Core", "Libraries\DellaSantaStart.Core\DellaSanta.Core.csproj", "{A508F741-A068-4A20-8973-44FC857CAACB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellaSanta.Layer", "Libraries\DellaSanta.Layer\DellaSanta.Layer.csproj", "{107F86DF-D701-4AA1-B187-4317E8BAF9A6}"
 EndProject

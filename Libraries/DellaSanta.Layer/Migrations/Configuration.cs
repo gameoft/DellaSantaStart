@@ -1,10 +1,7 @@
 namespace DellaSanta.Layer.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
-    using DellaSantaStart.Core;
+    using DellaSanta.Core;
 
     internal sealed class Configuration : DbMigrationsConfiguration<DellaSanta.Layer.ApplicationDbContext>
     {
