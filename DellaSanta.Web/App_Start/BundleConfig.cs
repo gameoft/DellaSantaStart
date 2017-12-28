@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace DellaSantaStart
+namespace DellaSanta.Web
 {
     public class BundleConfig
     {

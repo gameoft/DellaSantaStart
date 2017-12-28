@@ -7,7 +7,7 @@ using Autofac.Integration.Mvc;
 using DellaSanta.Layer;
 
 
-namespace DellaSantaStart
+namespace DellaSanta.Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {

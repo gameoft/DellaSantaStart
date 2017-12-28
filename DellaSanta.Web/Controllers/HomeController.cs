@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using DellaSanta.Layer;
 
-namespace DellaSantaStart.Controllers
+namespace DellaSanta.Web.Controllers
 {
     public class HomeController : Controller
     {

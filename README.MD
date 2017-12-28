@@ -2,10 +2,10 @@ README v1.0 / 29 DECEMBER 2017
 =
 
 # Project name
-DellasantaStart
+Dellasanta_Test
 
 ## Introduction
-Dellasanta is an MVC web application to administer a school.
+Dellasanta_Test is an MVC web application to administer a school.
 There a Course Paths which contain many courses.
 
 
@@ -32,7 +32,7 @@ IMPORTANT:
 **************************************
 The project use Entity Framework Migrations; to generate the database and seed it with seminal data follow these steps in VS2017:
 
--Go to the Web.config of the DellasantaStart.Web project and modify the connection string to point to an existing Database instance 
+-Go to the Web.config of the Dellasanta.Web project and modify the connection string to point to an existing Database instance 
 and choose a DataBase name which will be created, see next section.
 
 -Go to Package Manager Console and select Default project = "Libraries\DellaSanta.DataLayer"

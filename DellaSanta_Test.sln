@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{323678C0-2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellaSanta.Core", "Libraries\DellaSanta.Core\DellaSanta.Core.csproj", "{A508F741-A068-4A20-8973-44FC857CAACB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellaSanta_Test", "DellaSanta_Test\DellaSanta_Test.csproj", "{5F2A4DF7-4BA2-47EF-91AD-8CF63E0D0014}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellaSanta.Web", "DellaSanta.Web\DellaSanta.Web.csproj", "{5F2A4DF7-4BA2-47EF-91AD-8CF63E0D0014}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
