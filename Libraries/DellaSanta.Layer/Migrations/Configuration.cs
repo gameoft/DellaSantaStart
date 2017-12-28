@@ -19,7 +19,8 @@ namespace DellaSanta.Layer.Migrations
                 new CoursePath
                 {
                     CoursePathId = 1,
-                    CoursePathName = "Applied Math"
+                    CoursePathName = "Applied Math",
+                    Department = "Mathematics"
                 });
 
 
@@ -28,7 +29,8 @@ namespace DellaSanta.Layer.Migrations
                 new CoursePath
                 {
                     CoursePathId = 2,
-                    CoursePathName = "Logistics"
+                    CoursePathName = "Logistics",
+                    Department = "Systems"
                 });
 
             context.SaveChanges();

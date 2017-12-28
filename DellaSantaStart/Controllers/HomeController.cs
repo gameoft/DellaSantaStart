@@ -19,7 +19,7 @@ namespace DellaSantaStart.Controllers
         public ActionResult Index()
         {
             var coursePaths = _applicationDbContext.CoursePaths.ToList();
-            return View();
+            return View("Index", coursePaths);
         }
 
         public ActionResult About()

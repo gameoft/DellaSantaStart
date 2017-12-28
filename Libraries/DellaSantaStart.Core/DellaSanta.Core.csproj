@@ -7,8 +7,8 @@
     <ProjectGuid>{A508F741-A068-4A20-8973-44FC857CAACB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DellaSantaStart.Core</RootNamespace>
-    <AssemblyName>DellaSantaStart.Core</AssemblyName>
+    <RootNamespace>DellaSanta.Core</RootNamespace>
+    <AssemblyName>DellaSanta.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
