@@ -243,13 +243,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Libraries\DellaSanta.Core\DellaSanta.Core.csproj">
+      <Project>{a508f741-a068-4a20-8973-44fc857caacb}</Project>
+      <Name>DellaSanta.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\DellaSanta.Layer\DellaSanta.Layer.csproj">
       <Project>{107f86df-d701-4aa1-b187-4317e8baf9a6}</Project>
       <Name>DellaSanta.Layer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\DellaSantaStart.Core\DellaSanta.Core.csproj">
-      <Project>{a508f741-a068-4a20-8973-44fc857caacb}</Project>
-      <Name>DellaSanta.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

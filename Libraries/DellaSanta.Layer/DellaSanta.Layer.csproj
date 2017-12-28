@@ -62,15 +62,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DellaSantaStart.Core\DellaSanta.Core.csproj">
-      <Project>{a508f741-a068-4a20-8973-44fc857caacb}</Project>
-      <Name>DellaSanta.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\201712281331288_Initial.resx">
       <DependentUpon>201712281331288_Initial.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DellaSanta.Core\DellaSanta.Core.csproj">
+      <Project>{a508f741-a068-4a20-8973-44fc857caacb}</Project>
+      <Name>DellaSanta.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

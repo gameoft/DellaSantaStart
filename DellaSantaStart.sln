@@ -7,14 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellaSantaStart", "DellaSan
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{4B0838EF-5981-4AF0-AB10-2D154D5AB2D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellaSanta.Core", "Libraries\DellaSantaStart.Core\DellaSanta.Core.csproj", "{A508F741-A068-4A20-8973-44FC857CAACB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellaSanta.Layer", "Libraries\DellaSanta.Layer\DellaSanta.Layer.csproj", "{107F86DF-D701-4AA1-B187-4317E8BAF9A6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{323678C0-215F-4917-B236-AB248FE1E3C6}"
 	ProjectSection(SolutionItems) = preProject
 		README.MD = README.MD
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellaSanta.Core", "Libraries\DellaSanta.Core\DellaSanta.Core.csproj", "{A508F741-A068-4A20-8973-44FC857CAACB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,21 +26,21 @@ Global
 		{5F2A4DF7-4BA2-47EF-91AD-8CF63E0D0014}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F2A4DF7-4BA2-47EF-91AD-8CF63E0D0014}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F2A4DF7-4BA2-47EF-91AD-8CF63E0D0014}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A508F741-A068-4A20-8973-44FC857CAACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A508F741-A068-4A20-8973-44FC857CAACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A508F741-A068-4A20-8973-44FC857CAACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A508F741-A068-4A20-8973-44FC857CAACB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{107F86DF-D701-4AA1-B187-4317E8BAF9A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{107F86DF-D701-4AA1-B187-4317E8BAF9A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{107F86DF-D701-4AA1-B187-4317E8BAF9A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{107F86DF-D701-4AA1-B187-4317E8BAF9A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A508F741-A068-4A20-8973-44FC857CAACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A508F741-A068-4A20-8973-44FC857CAACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A508F741-A068-4A20-8973-44FC857CAACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A508F741-A068-4A20-8973-44FC857CAACB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A508F741-A068-4A20-8973-44FC857CAACB} = {4B0838EF-5981-4AF0-AB10-2D154D5AB2D2}
 		{107F86DF-D701-4AA1-B187-4317E8BAF9A6} = {4B0838EF-5981-4AF0-AB10-2D154D5AB2D2}
+		{A508F741-A068-4A20-8973-44FC857CAACB} = {4B0838EF-5981-4AF0-AB10-2D154D5AB2D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5ACA9B6E-B22A-4FD8-A51A-865E64F0EEEC}
