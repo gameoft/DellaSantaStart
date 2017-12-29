@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DellaSanta.Core
 {
-    public class UploadedeFiles
+    public class UploadedFiles
     {
 
-        public UploadedeFiles()
+        public UploadedFiles()
         {
           
         }

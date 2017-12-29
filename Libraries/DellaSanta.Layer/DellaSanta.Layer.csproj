@@ -49,6 +49,10 @@
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Mapping\UploadedFilesConfiguration.cs" />
+    <Compile Include="Migrations\201712291034216_Initial.cs" />
+    <Compile Include="Migrations\201712291034216_Initial.Designer.cs">
+      <DependentUpon>201712291034216_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -61,6 +65,11 @@
       <Project>{a508f741-a068-4a20-8973-44fc857caacb}</Project>
       <Name>DellaSanta.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201712291034216_Initial.resx">
+      <DependentUpon>201712291034216_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

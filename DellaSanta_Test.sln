@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellaSanta.Layer", "Librari
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{323678C0-215F-4917-B236-AB248FE1E3C6}"
 	ProjectSection(SolutionItems) = preProject
+		DellaSanta_Text Test Questions 2017.docx = DellaSanta_Text Test Questions 2017.docx
 		README.MD = README.MD
 	EndProjectSection
 EndProject

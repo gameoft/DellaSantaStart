@@ -18,7 +18,7 @@ namespace DellaSanta.Layer
         {
         }
 
-        public DbSet<UploadedeFiles> UploadedFiles { get; set; }
+        public DbSet<UploadedFiles> UploadedFiles { get; set; }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

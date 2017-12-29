@@ -5,12 +5,12 @@ using DellaSanta.Core;
 
 namespace DellaSanta.Layer
 {
-    public class UploadedFilesConfiguration : EntityTypeConfiguration<UploadedeFiles>
+    public class UploadedFilesConfiguration : EntityTypeConfiguration<UploadedFiles>
     {
         public UploadedFilesConfiguration()
         {
             Property(c => c.NameOnDisk)
-                .HasMaxLength(4096)
+                .HasMaxLength(256)
                 .IsFixedLength()
                 .IsRequired()
                 .HasColumnAnnotation("Index",

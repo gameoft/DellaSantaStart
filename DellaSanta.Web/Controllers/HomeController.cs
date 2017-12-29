@@ -89,7 +89,8 @@ namespace DellaSanta.Web.Controllers
                     try
                     {
                         file.SaveAs(pathToCheck);
-
+                        _applicationDbContext.UploadedFiles.Add(new Core.UploadedFiles { Name = file.FileName, NameOnDisk = fileName });
+                        _applicationDbContext.SaveChanges();
                         return View("UploadConfirmed");
                     }
                     catch(Exception ex)

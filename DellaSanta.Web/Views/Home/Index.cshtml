@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DellaSanta.Core.UploadedeFiles>
+﻿@model IEnumerable<DellaSanta.Core.UploadedFiles>
 
 @{
     ViewBag.Title = "Home Page";
@@ -41,18 +41,19 @@
 
     </table>
     
+    <br /><br />
    
     @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <table>
+        <table class="table table-hover table-striped table-condensed small">
             <tr>
-                <td>File:</td>
-                <td>
+                <td class="col-md-2">File:</td>
+                <td class="col-md-10">
                     <input type="file" name="UploadedFile"  />
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td colspan="2" class="col-md-2">
                     <input type="submit" name="Submit" value="Submit" />
                 </td>
             </tr>

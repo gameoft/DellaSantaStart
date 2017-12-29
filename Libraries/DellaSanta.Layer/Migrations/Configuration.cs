@@ -16,7 +16,7 @@ namespace DellaSanta.Layer.Migrations
 
             context.UploadedFiles.AddOrUpdate(
                 c => c.UploadedFilesId,
-                new UploadedeFiles
+                new UploadedFiles
                 {
                     UploadedFilesId = 1,
                     Name = "gText Test Questions 2017.docx",
