@@ -3,7 +3,7 @@ using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;
 using DellaSanta.Core;
 
-namespace DellaSanta.Layer
+namespace DellaSanta.DataLayer
 {
     public class UploadedFilesConfiguration : EntityTypeConfiguration<UploadedFiles>
     {

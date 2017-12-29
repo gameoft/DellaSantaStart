@@ -8,19 +8,21 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <strong>Upload your .docs file</strong>
+        <strong>Upload your .docx file</strong>
     </div>
 
     <table class="table table-hover table-striped table-condensed small">
         <tr>
 
-            <th class="col-md-1">
+            <th class="col-md-4">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th class="col-md-4">
+            <th class="col-md-7">
                 @Html.DisplayNameFor(model => model.NameOnDisk)
             </th>
-
+            <th class="col-md-1">
+                Is Processed
+            </th>
     </tr>
 
     @foreach (var item in Model)
@@ -33,8 +35,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NameOnDisk)
             </td>
-
-
+            <td>
+                @if (!item.IsProcessed)
+                {
+                    @Html.ActionLink("Process", "Process", "Home", new { name = item.NameOnDisk }, new { @class = "btn btn-danger btn-xs" })
+                }
+                
+            </td>
           
         </tr>
     }
@@ -45,6 +52,7 @@
    
     @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
+        @Html.AntiForgeryToken()
         <table class="table table-hover table-striped table-condensed small">
             <tr>
                 <td class="col-md-2">File:</td>

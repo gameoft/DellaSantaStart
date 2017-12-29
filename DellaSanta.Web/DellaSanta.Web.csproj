@@ -64,8 +64,9 @@
     <Reference Include="CommonServiceLocator, Version=2.0.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.1\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
-      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -184,7 +185,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HttpModules\PrePostProcessingModule.cs" />
-    <Compile Include="Models\Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +244,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -253,9 +254,13 @@
       <Project>{a508f741-a068-4a20-8973-44fc857caacb}</Project>
       <Name>DellaSanta.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Libraries\DellaSanta.Layer\DellaSanta.Layer.csproj">
+    <ProjectReference Include="..\Libraries\DellaSanta.DataLayer\DellaSanta.DataLayer.csproj">
       <Project>{107f86df-d701-4aa1-b187-4317e8baf9a6}</Project>
-      <Name>DellaSanta.Layer</Name>
+      <Name>DellaSanta.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\DellaSanta.Services\DellaSanta.Services.csproj">
+      <Project>{7a32e6c1-5776-415b-b027-2c8c70a3e061}</Project>
+      <Name>DellaSanta.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

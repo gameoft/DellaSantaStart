@@ -4,11 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DellaSanta.Layer;
-using DellaSanta.Web.Models;
+using DellaSanta.DataLayer;
 using  System.Web.UI.WebControls;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using DellaSanta.Services;
 
 namespace DellaSanta.Web.Controllers
 {
@@ -27,15 +27,7 @@ namespace DellaSanta.Web.Controllers
             return View("Index", uploadedFiles);
         }
 
-        public ActionResult Process()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            //DocxParser.Parse(fileBytes, Convert.ToInt32(file.ContentLength));
-
-            return View();
-        }
-
+     
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
@@ -46,7 +38,7 @@ namespace DellaSanta.Web.Controllers
 
         // Upload post method
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult Upload(FormCollection formCollection)
         {
             if (Request != null)
@@ -89,6 +81,8 @@ namespace DellaSanta.Web.Controllers
                     try
                     {
                         file.SaveAs(pathToCheck);
+                        
+
                         _applicationDbContext.UploadedFiles.Add(new Core.UploadedFiles { Name = file.FileName, NameOnDisk = fileName });
                         _applicationDbContext.SaveChanges();
                         return View("UploadConfirmed");
@@ -103,6 +97,27 @@ namespace DellaSanta.Web.Controllers
             }
             return View("Index");
         }
+
+        
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Process(string name)
+        {
+
+            var path = Server.MapPath("~/uploads");
+            var pathToFile = Path.Combine(path, name);
+
+
+            if (DocxProcessingService.ProcessDocument(pathToFile)) {
+                _applicationDbContext.UploadedFiles.Where(x => x.NameOnDisk == name).First().IsProcessed = true;
+                _applicationDbContext.SaveChanges();
+            }
+
+            //DocxParser.Parse(fileBytes, Convert.ToInt32(file.ContentLength));
+            return View("Index");
+        }
+
+        
 
     }
 }

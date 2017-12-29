@@ -16,6 +16,7 @@ namespace DellaSanta.Core
         public int UploadedFilesId { get; set; }
         public string Name { get; set; }
         public string NameOnDisk { get; set; }
+        public bool IsProcessed { get; set; }
 
 
 

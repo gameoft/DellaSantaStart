@@ -4,7 +4,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
-using DellaSanta.Layer;
+using DellaSanta.DataLayer;
 
 
 namespace DellaSanta.Web

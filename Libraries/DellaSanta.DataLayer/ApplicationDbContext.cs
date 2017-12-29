@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using DellaSanta.Core;
 
-namespace DellaSanta.Layer
+namespace DellaSanta.DataLayer
 {
     public class ApplicationDbContext : DbContext
     {

@@ -1,4 +1,4 @@
-namespace DellaSanta.Layer.Migrations
+namespace DellaSanta.DataLayer.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
@@ -14,6 +14,7 @@ namespace DellaSanta.Layer.Migrations
                         UploadedFilesId = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         NameOnDisk = c.String(nullable: false, maxLength: 256, fixedLength: true),
+                        IsProcessed = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.UploadedFilesId)
                 .Index(t => t.NameOnDisk, unique: true, name: "AK_UploadedFiles_UploadedFilesName");
