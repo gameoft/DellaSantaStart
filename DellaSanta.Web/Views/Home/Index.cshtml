@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DellaSanta.Core.CoursePath>
+﻿@model IEnumerable<DellaSanta.Core.UploadedeFiles>
 
 @{
     ViewBag.Title = "Home Page";
@@ -8,58 +8,58 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <strong>Course Paths</strong>
+        <strong>Upload your .docs file</strong>
     </div>
 
     <table class="table table-hover table-striped table-condensed small">
         <tr>
 
             <th class="col-md-1">
-                @Html.DisplayNameFor(model => model.CoursePathName)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th class="col-md-4">
-                @Html.DisplayNameFor(model => model.Department)
+                @Html.DisplayNameFor(model => model.NameOnDisk)
             </th>
-       
 
-            @*<th class="col-md-1 text-center">
-                @Html.DisplayNameFor(model => model.IsInstalled)
-            </th>
-            <th class="col-md-1">
-                @Html.ActionLink("Create", "Create", "Parts",
-                              new { workOrderId = ViewBag.WorkOrderId },
-                              new { @class = "btn btn-primary btn-xs", data_modal = "parts" }
-                )
-            </th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameOnDisk)
+            </td>
+
+
+          
         </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.CoursePathName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Department)
-                </td>
-             
-
-                @*<td>
-                    @Html.ActionLink("Edit", "Edit", "Parts"
-                         , new { id = item.PartId, workOrderId = ViewBag.WorkOrderId }
-                   , new { @class = "btn btn-default btn-xs", data_modal = "parts" }
-                    ) |
-
-                    @Html.ActionLink("Delete", "Delete", "Parts"
-                         , new { id = item.PartId, workOrderId = ViewBag.WorkOrderId }
-                   , new { @class = "btn btn-danger btn-xs", data_modal = "parts" }
-                    )
-                </td>*@
-            </tr>
-        }
+    }
 
     </table>
+    
+   
+    @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <table>
+            <tr>
+                <td>File:</td>
+                <td>
+                    <input type="file" name="UploadedFile"  />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" name="Submit" value="Submit" />
+                </td>
+            </tr>
+        </table>
+    }
+    
+ 
 </div>
 
 

@@ -12,63 +12,23 @@ namespace DellaSanta.Layer.Migrations
 
         protected override void Seed(DellaSanta.Layer.ApplicationDbContext context)
         {
-            #region coursepaths
+            #region uploadedfiles
 
-            context.CoursePaths.AddOrUpdate(
-                c => c.CoursePathId,
-                new CoursePath
+            context.UploadedFiles.AddOrUpdate(
+                c => c.UploadedFilesId,
+                new UploadedeFiles
                 {
-                    CoursePathId = 1,
-                    CoursePathName = "Applied Math",
-                    Department = "Mathematics"
+                    UploadedFilesId = 1,
+                    Name = "gText Test Questions 2017.docx",
+                    NameOnDisk = "gText Test Questions 2017.docx"
                 });
 
-
-            context.CoursePaths.AddOrUpdate(
-                c => c.CoursePathId,
-                new CoursePath
-                {
-                    CoursePathId = 2,
-                    CoursePathName = "Logistics",
-                    Department = "Systems"
-                });
-
-            context.SaveChanges();
-
-            #endregion coursepaths
-
-            #region course
             
-            context.Courses.AddOrUpdate(
-                c => new { c.CoursePathId, c.CourseName },
-                new Course
-                {
-                    CourseName = "Mathematics 1",
-                    CoursePathId = 1,
-                });
-
-           
-            context.Courses.AddOrUpdate(
-                c => new { c.CoursePathId, c.CourseName },
-                new Course
-                {
-                    CourseName = "Mathematics 2",
-                    CoursePathId = 1,
-                });
-
-            context.Courses.AddOrUpdate(
-            c => new { c.CoursePathId, c.CourseName },
-            new Course
-            {
-                CourseName = "Gentle Introduction to Logistics",
-                CoursePathId = 2,
-            });
-
-
-
             context.SaveChanges();
 
-            #endregion course
+            #endregion uploadedfiles
+
+        
         }
     }
 }

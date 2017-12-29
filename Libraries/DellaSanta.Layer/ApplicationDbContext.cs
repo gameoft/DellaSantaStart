@@ -18,14 +18,12 @@ namespace DellaSanta.Layer
         {
         }
 
-        public DbSet<Course> Courses { get; set; }
-        public DbSet<CoursePath> CoursePaths { get; set; }
+        public DbSet<UploadedeFiles> UploadedFiles { get; set; }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new CourseConfiguration());
-            modelBuilder.Configurations.Add(new CoursePathConfiguration());
-    
+            modelBuilder.Configurations.Add(new UploadedFilesConfiguration());
+       
             base.OnModelCreating(modelBuilder);
         }
     }

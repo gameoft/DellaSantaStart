@@ -48,23 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
-    <Compile Include="Mapping\CourseConfiguration.cs" />
-    <Compile Include="Mapping\CoursePathConfiguration.cs" />
-    <Compile Include="Migrations\201712281331288_Initial.cs" />
-    <Compile Include="Migrations\201712281331288_Initial.Designer.cs">
-      <DependentUpon>201712281331288_Initial.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Mapping\UploadedFilesConfiguration.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712281331288_Initial.resx">
-      <DependentUpon>201712281331288_Initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DellaSanta.Core\DellaSanta.Core.csproj">

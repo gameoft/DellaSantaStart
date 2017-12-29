@@ -16,6 +16,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellaSanta.Core", "Librarie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellaSanta.Web", "DellaSanta.Web\DellaSanta.Web.csproj", "{5F2A4DF7-4BA2-47EF-91AD-8CF63E0D0014}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellaSanta.Tests", "Tests\DellaSanta.Tests\DellaSanta.Tests.csproj", "{FF09A8D0-F506-4E73-B51D-FE5F335BE0ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B0CD246F-5B11-4F4F-B6CE-DBEA3ACA2CC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +38,10 @@ Global
 		{5F2A4DF7-4BA2-47EF-91AD-8CF63E0D0014}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F2A4DF7-4BA2-47EF-91AD-8CF63E0D0014}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F2A4DF7-4BA2-47EF-91AD-8CF63E0D0014}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF09A8D0-F506-4E73-B51D-FE5F335BE0ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF09A8D0-F506-4E73-B51D-FE5F335BE0ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF09A8D0-F506-4E73-B51D-FE5F335BE0ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF09A8D0-F506-4E73-B51D-FE5F335BE0ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +49,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{107F86DF-D701-4AA1-B187-4317E8BAF9A6} = {4B0838EF-5981-4AF0-AB10-2D154D5AB2D2}
 		{A508F741-A068-4A20-8973-44FC857CAACB} = {4B0838EF-5981-4AF0-AB10-2D154D5AB2D2}
+		{FF09A8D0-F506-4E73-B51D-FE5F335BE0ED} = {B0CD246F-5B11-4F4F-B6CE-DBEA3ACA2CC6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5ACA9B6E-B22A-4FD8-A51A-865E64F0EEEC}

@@ -5,8 +5,8 @@ README v1.0 / 29 DECEMBER 2017
 Dellasanta_Test
 
 ## Introduction
-Dellasanta_Test is an MVC web application to administer a school.
-There a Course Paths which contain many courses.
+Dellasanta_Test is an MVC web application to parse a docs document.
+
 
 
 ## Usage
