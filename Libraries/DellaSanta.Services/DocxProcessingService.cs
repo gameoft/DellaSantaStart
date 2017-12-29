@@ -16,116 +16,153 @@ namespace DellaSanta.Services
 {
     public class DocxProcessingService
     {
-        public static object PatternAnalyzer { get; private set; }
-
-        public static bool ProcessDocument(string FileName)
+        public static List<DellaSanta.Core.ParsedParagraph> Parse(string fileName)
         {
-
-            try
+            List<DellaSanta.Core.ParsedParagraph> paragraphs = null;
+            using (MemoryStream ms = new MemoryStream())
             {
-                using (MemoryStream ms = new MemoryStream())
+                using (FileStream file = new FileStream(fileName, FileMode.Open, FileAccess.Read))
                 {
-                    using (FileStream file = new FileStream(FileName, FileMode.Open, FileAccess.Read))
+                    file.CopyTo(ms);
+                    // Open the package with read access.
+                    // Open a WordprocessingDocument for editing using the filepath.
+                    DocumentFormat.OpenXml.Packaging.WordprocessingDocument wordprocessingDocument = DocumentFormat.OpenXml.Packaging.WordprocessingDocument.Open(ms, true);
+
+                    // Assign a reference to the existing document body.
+                    DocumentFormat.OpenXml.Wordprocessing.Body body = wordprocessingDocument.MainDocumentPart.Document.Body;
+
+                    paragraphs = body.ChildElements
+                                .Where(x => !string.IsNullOrEmpty(x.InnerText))
+                                .Select(x => new DellaSanta.Core.ParsedParagraph
+                                {
+                                    Id = x.InnerText.GetHashCode(),
+                                    Text = x.InnerText,
+                                    Repetitions_In_Document = 0
+                                })
+                                .ToList();
+
+
+                    SearchRepetitions(paragraphs);
+                    
+                    // Close the handle explicitly.
+                    wordprocessingDocument.Close();
+
+                    return paragraphs;
+                }
+            }
+        }
+
+        public static List<DellaSanta.Core.ParsedParagraph> SearchRepetitions(List<DellaSanta.Core.ParsedParagraph> paragraphs)
+        {
+            var luceneVersion = Lucene.Net.Util.Version.LUCENE_30;
+
+            using (var directory = new Lucene.Net.Store.RAMDirectory())
+            using (Lucene.Net.Analysis.Analyzer analyzer = new Lucene.Net.Analysis.Standard.StandardAnalyzer(luceneVersion))
+            {
+                using (Lucene.Net.Index.IndexWriter ixw = new Lucene.Net.Index.IndexWriter(directory, analyzer, Lucene.Net.Index.IndexWriter.MaxFieldLength.UNLIMITED))
+                {
+
+                    foreach (var par in paragraphs)
                     {
-                        file.CopyTo(ms);
-                        // Open the package with read access.
-                        // Open a WordprocessingDocument for editing using the filepath.
-                        DocumentFormat.OpenXml.Packaging.WordprocessingDocument wordprocessingDocument = DocumentFormat.OpenXml.Packaging.WordprocessingDocument.Open(ms, true);
+                        var document = new Lucene.Net.Documents.Document();
+                        document.Add(new Lucene.Net.Documents.Field("Id", par.Text.GetHashCode().ToString(), Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.NOT_ANALYZED, Lucene.Net.Documents.Field.TermVector.NO));
+                        document.Add(new Lucene.Net.Documents.Field("content", par.Text, Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.ANALYZED, Lucene.Net.Documents.Field.TermVector.WITH_POSITIONS_OFFSETS));
+                        ixw.AddDocument(document);
+                    }
+                    ixw.Commit();
 
-                        // Assign a reference to the existing document body.
-                        DocumentFormat.OpenXml.Wordprocessing.Body body = wordprocessingDocument.MainDocumentPart.Document.Body;
+                    var parser = new Lucene.Net.QueryParsers.QueryParser(Lucene.Net.Util.Version.LUCENE_30, "content", analyzer);
+                    parser.DefaultOperator = Lucene.Net.QueryParsers.QueryParser.Operator.AND;
+                    var indexSearcher = new Lucene.Net.Search.IndexSearcher(directory, true);
 
-                        var paragraphs = body.ChildElements.Where(x => !string.IsNullOrEmpty(x.InnerText)).Select(x => new DellaSanta.Core.Paragraph { Id = x.InnerText.GetHashCode(), Text = x.InnerText, Repetitions_In_Document = 0 }).ToList();
+                    foreach (var paragraph in paragraphs)
+                    {
+                        StringBuilder qItem = new StringBuilder("content:");
+                        qItem.Append(paragraph.Text.Replace(":", ""));
+                        var query = parser.Parse(qItem.ToString());
+                        Lucene.Net.Search.TopDocs result = indexSearcher.Search(query, 20);
+                        paragraph.Repetitions_In_Document = result.TotalHits;
 
-                        //Find repetitions
-                        var luceneVersion = Lucene.Net.Util.Version.LUCENE_30;
-                        using (RAMDirectory directory = new RAMDirectory())
-                        using (Analyzer analyzer = new Lucene.Net.Analysis.Standard.StandardAnalyzer(luceneVersion))
+                    }
+                }
+            }
+
+            return paragraphs;
+
+        }
+
+
+        public static bool AddComments(List<DellaSanta.Core.ParsedParagraph> reps, string fileName)
+        {
+            // Open a WordprocessingDocument for editing using the filepath.
+            using (var wordprocessingDocument = DocumentFormat.OpenXml.Packaging.WordprocessingDocument.Open(fileName, true))
+            {
+
+                // Locate the first paragraph in the document.
+                var listParagraphs =
+                    wordprocessingDocument.MainDocumentPart.Document.Descendants<DocumentFormat.OpenXml.Wordprocessing.Paragraph>().ToList();
+
+                for (int i = 0; i < listParagraphs.Count; i++)
+                {
+                    if (!string.IsNullOrEmpty(listParagraphs[i].InnerText))
+                    {
+                        var rep = reps.Where(x => x.Text == listParagraphs[i].InnerText).FirstOrDefault();
+                        if (null != rep && rep.Repetitions_In_Document > 1)
                         {
-                            using (IndexWriter ixw = new IndexWriter(directory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED))
+                            DocumentFormat.OpenXml.Wordprocessing.Comments comments = null;
+                            string id = "0";
+
+                            if (wordprocessingDocument.MainDocumentPart.GetPartsCountOfType<DocumentFormat.OpenXml.Packaging.WordprocessingCommentsPart>() > 0)
                             {
-
-                                foreach (var par in paragraphs)
+                                comments =
+                                    wordprocessingDocument.MainDocumentPart.WordprocessingCommentsPart.Comments;
+                                if (comments.HasChildren)
                                 {
-                                    Lucene.Net.Documents.Document document = new Lucene.Net.Documents.Document();
-                                    document.Add(new Field("Id", par.Text.GetHashCode().ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED, Field.TermVector.NO));
-                                    document.Add(new Field("content", par.Text, Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.WITH_POSITIONS_OFFSETS));
-                                    ixw.AddDocument(document);
-                                }
-                                ixw.Commit();
-
-                                var parser = new QueryParser(Lucene.Net.Util.Version.LUCENE_30, "content", analyzer);
-                                parser.DefaultOperator = QueryParser.Operator.AND;
-                                Lucene.Net.Search.IndexSearcher indexSearcher = new IndexSearcher(directory, true);
-                                //int totRepeatedParagraphs = 0;
-                                foreach (var paragraph in paragraphs)
-                                {
-                                    StringBuilder qItem = new StringBuilder("content:");
-                                    qItem.Append(paragraph.Text);
-                                    var query = parser.Parse(qItem.ToString());
-                                    TopDocs result = indexSearcher.Search(query, 20);
-                                    paragraph.Repetitions_In_Document = result.TotalHits;
-                                    //if (result.TotalHits > 1)
-                                    //    totRepeatedParagraphs++;
+                                    id = comments.Descendants<DocumentFormat.OpenXml.Wordprocessing.Comment>().Select(e => e.Id.Value).Max();
                                 }
                             }
+                            else
+                            {
+                                var commentPart =
+                                            wordprocessingDocument.MainDocumentPart.AddNewPart<DocumentFormat.OpenXml.Packaging.WordprocessingCommentsPart>();
+                                commentPart.Comments = new DocumentFormat.OpenXml.Wordprocessing.Comments();
+                                comments = commentPart.Comments;
+                            }
+
+                            // Compose a new Comment and add it to the Comments part.
+                            var p = new DocumentFormat.OpenXml.Wordprocessing.Paragraph(new DocumentFormat.OpenXml.Wordprocessing.Run(new DocumentFormat.OpenXml.Wordprocessing.Text("Repetitions: " + rep.Repetitions_In_Document.ToString())));
+                            var cmt = new DocumentFormat.OpenXml.Wordprocessing.Comment()
+                            {
+                                Id = id,
+                                Author = "Automatic",
+                                Date = DateTime.Now
+                            };
+
+                            cmt.AppendChild(p);
+                            comments.AppendChild(cmt);
+                            comments.Save();
+
+                            // Specify the text range for the Comment. 
+                            // Insert the new CommentRangeStart before the first run of paragraph.
+                            listParagraphs[i].InsertBefore(new DocumentFormat.OpenXml.Wordprocessing.CommentRangeStart() { Id = id }, listParagraphs[i].GetFirstChild<DocumentFormat.OpenXml.Wordprocessing.Run>());
+
+                            // Insert the new CommentRangeEnd after last run of paragraph.
+                            var cmtEnd = listParagraphs[i].InsertAfter(new DocumentFormat.OpenXml.Wordprocessing.CommentRangeEnd() { Id = id }, listParagraphs[i].Elements<DocumentFormat.OpenXml.Wordprocessing.Run>().Last());
+
+                            // Compose a run with CommentReference and insert it.
+                            listParagraphs[i].InsertAfter(new DocumentFormat.OpenXml.Wordprocessing.Run(new DocumentFormat.OpenXml.Wordprocessing.CommentReference() { Id = id }), cmtEnd);
+
                         }
 
-                        //TODO TODO TODO TODO TODO TODO               //Modify original doc
-
-                        //var paragraphs = body.ChildElements.Select(x => new DellaSanta.Core.Paragraph { Id = x.InnerText.GetHashCode(), Text = x.InnerText, Repetitions_In_Document = 0 }).ToList();
-                        //foreach (var item in body.ChildElements)
-                        //{
-                        //    var par = paragraphs.Where(x => x.Text == item.InnerText).FirstOrDefault();
-                        //    if (null != par)
-                        //    {
-                        //        item.AddAnnotation("Repeated: " + par.Repetitions_In_Document);
-                        //    }
-                        //}
-                        //wordprocessingDocument.Save();
-                        return true;
                     }
 
                 }
-                
+
+
+            
+
             }
-            catch (Exception exc)
-            {
-                var msg = exc.Message;
-                //throw;
-                return false;
-            }
-
-           
-
-
-
-            //try
-            //{
-            //    using (MemoryStream upFile = new MemoryStream())
-            //    {
-            //        upFile.Write(FileBytes, 0, ContentLength);
-
-
-            //        // Open the package with read access.
-            //        //var pippo = data.GetType();
-            //        // Open a WordprocessingDocument for editing using the filepath.
-            //        WordprocessingDocument wordprocessingDocument = WordprocessingDocument.Open(upFile, true);
-
-            //        // Assign a reference to the existing document body.
-            //        Body body = wordprocessingDocument.MainDocumentPart.Document.Body;
-
-            //        var paragraphs = body.ChildElements.ToList();
-            //        return paragraphs;
-
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    var msg = ex.Message;
-            //    throw;
-            //}
-
+            return true;
         }
     }
 }

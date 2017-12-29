@@ -99,21 +99,21 @@ namespace DellaSanta.Web.Controllers
         }
 
         
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
+        
         public ActionResult Process(string name)
         {
 
             var path = Server.MapPath("~/uploads");
             var pathToFile = Path.Combine(path, name);
 
+            List<DellaSanta.Core.ParsedParagraph> paragraphs = DocxProcessingService.Parse(pathToFile);
+            
 
-            if (DocxProcessingService.ProcessDocument(pathToFile)) {
+            if (DocxProcessingService.AddComments(paragraphs, pathToFile)) {
                 _applicationDbContext.UploadedFiles.Where(x => x.NameOnDisk == name).First().IsProcessed = true;
                 _applicationDbContext.SaveChanges();
             }
-
-            //DocxParser.Parse(fileBytes, Convert.ToInt32(file.ContentLength));
+            
             return View("Index");
         }
 
