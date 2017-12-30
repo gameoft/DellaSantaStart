@@ -9,6 +9,7 @@ using  System.Web.UI.WebControls;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using DellaSanta.Services;
+using DellaSanta.Core;
 
 namespace DellaSanta.Web.Controllers
 {
@@ -106,15 +107,16 @@ namespace DellaSanta.Web.Controllers
             var path = Server.MapPath("~/uploads");
             var pathToFile = Path.Combine(path, name);
 
-            List<DellaSanta.Core.ParsedParagraph> paragraphs = DocxProcessingService.Parse(pathToFile);
-            
-
-            if (DocxProcessingService.AddComments(paragraphs, pathToFile)) {
+            var processOutcome = DocxProcessingService.Parse(pathToFile);
+           
+            if (processOutcome) {
                 _applicationDbContext.UploadedFiles.Where(x => x.NameOnDisk == name).First().IsProcessed = true;
                 _applicationDbContext.SaveChanges();
+
+                return View("ProcessConfirmed");
             }
-            
-            return View("Index");
+
+            return View("ProcessError");
         }
 
         

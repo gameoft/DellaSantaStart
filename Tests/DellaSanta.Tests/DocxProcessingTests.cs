@@ -5,15 +5,6 @@ using DellaSanta.Services;
 //using DocumentFormat.OpenXml.Packaging;
 //using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Lucene.Net.Index.Memory;
-using Lucene.Net.Analysis.Standard;
-using Lucene.Net.Analysis;
-//using Lucene.Net.QueryParsers.Classic;
-using Lucene.Net.Search;
-using Lucene.Net.Store;
-using Lucene.Net.Index;
-using Lucene.Net.Documents;
-using Lucene.Net.QueryParsers;
 using System.Text;
 using DocumentFormat.OpenXml.Drawing;
 

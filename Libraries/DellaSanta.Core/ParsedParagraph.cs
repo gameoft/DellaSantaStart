@@ -8,8 +8,8 @@ namespace DellaSanta.Core
 {
     public class ParsedParagraph
     {
-        public int Id { get; set; }
         public string Text { get; set; }
+        public string HashedXml { get; set; }
         public int Repetitions_In_Document { get; set; }
 
     }
